@@ -2,7 +2,7 @@ import { useAuth } from "../auth/AuthContext";
 import { useState } from "react";
 
 export default function ActivityList({ activities }) {
-  const {loggedIn} = useState();
+  const {loggedIn} = useAuth();
 
   return (
     <ul>

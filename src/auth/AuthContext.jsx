@@ -44,8 +44,10 @@ export function AuthProvider({ children }) {
     setLogIn(true);
   };
 
-  const logout = () => setToken(null);
-
+  const logout = () => {
+    setToken(null);
+    setLogIn(false);
+  }
   const value = { loggedIn, token, register, login, logout };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
