@@ -18,7 +18,6 @@ export default function ActivityDetails(){
     }, []);
 
     const handleClick = async () =>{
-        console.log(token, activity.id);
         await deleteActivity(token, activity.id);
         nav("/");
     }    

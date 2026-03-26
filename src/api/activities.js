@@ -84,12 +84,37 @@ export async function deleteActivity(token, id) {
     throw Error(result.message);
   }
 }
+export async function deleteRoutine(token, id) {
+  if(!token){
+    throw Error("You must be logged in to delete Routines");
+  }
+  const response = await fetch(API + "/routines/" + id, {
+    method: "DELETE",
+    headers: {Authorization: "Bearer " + token },
+  });
+  if(!response.ok){
+    const result = await response.json();
+    throw Error(result.message);
+  }
+}
 
 export async function getAnActivity(id) {
   try {
     const response = await fetch(API + "/activities/" + id);
     const result = await response.json();
     return result;
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+}
+
+export async function getOneRoutine(id) {
+  try {
+    const response = await fetch(API + "/routines" );
+    const result = await response.json();
+    const singleResult = result.find(routine => routine.id == id);
+    return singleResult;
   } catch (e) {
     console.error(e);
     return [];

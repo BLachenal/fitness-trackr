@@ -24,17 +24,17 @@ export default function RoutineForm({ syncRoutines }) {
 
   return (
     <>
-      <h2>Add a new activity</h2>
+      <h2>Add a new Routine</h2>
       <form action={tryCreateRoutine}>
         <label>
           Name
-          <input type="text" name="name" />
+          <input type="text" required name="name" />
         </label>
         <label>
-          Description
-          <input type="text" name="goal" />
+          Goal
+          <input type="text" required name="goal" />
         </label>
-        <button>Add activity</button>
+        <button>Add Routine</button>
       </form>
       {error && <p role="alert">{error}</p>}
     </>

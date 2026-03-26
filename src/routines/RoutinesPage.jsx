@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { getRoutines } from "../api/activities";
 
-import ActivityList from "./ActivityList";
-import ActivityForm from "./ActivityForm";
+import RoutineList from "./RoutineList";
+import RoutineForm from "./RoutineForm";
 
 export default function RoutinesPage() {
   const [routines, setRoutines] = useState([]);
