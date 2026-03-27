@@ -45,7 +45,7 @@ export async function createActivity(token, activity) {
     const result = await response.json();
     throw Error(result.message);
   }
-}
+}/**Create a new routine  */
 export async function createRoutine(token, routine) {
   if (!token) {
     throw Error("You must be signed in to create an activity.");
@@ -84,6 +84,7 @@ export async function deleteActivity(token, id) {
     throw Error(result.message);
   }
 }
+/**Delete a routine from the API */
 export async function deleteRoutine(token, id) {
   if(!token){
     throw Error("You must be logged in to delete Routines");
@@ -97,7 +98,7 @@ export async function deleteRoutine(token, id) {
     throw Error(result.message);
   }
 }
-
+/**Get a singular activity from the API */
 export async function getAnActivity(id) {
   try {
     const response = await fetch(API + "/activities/" + id);
@@ -109,14 +110,22 @@ export async function getAnActivity(id) {
   }
 }
 
-/* export async function getOneRoutine(id) {
-  try {
-    const response = await fetch(API + "/routines" );
-    const result = await response.json();
-    const singleResult = result.find(routine => routine.id == id);
-    return singleResult;
-  } catch (e) {
-    console.error(e);
-    return [];
+export async function addSets(token, set) {
+  if (!token) {
+    throw Error("You must be signed in to create an activity.");
   }
-} */
+
+  const response = await fetch(API + "/sets", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify(set),
+  });
+  console.log(response);
+  if (!response.ok) {
+    const result = await response.json();
+    throw Error(result.message);
+  }
+}
