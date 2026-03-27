@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { createRoutine } from "../api/activities";
+import { createRoutine, getRoutines } from "../api/activities";
 import { useAuth } from "../auth/AuthContext";
+import { useNavigate } from "react-router";
+
 
 /** Form for a user to create a new activity with a name and description. */
 export default function RoutineForm({ syncRoutines }) {
   const { token } = useAuth();
+  const nav = useNavigate();
 
   const [error, setError] = useState(null);
 
@@ -16,7 +19,9 @@ export default function RoutineForm({ syncRoutines }) {
 
     try {
       await createRoutine(token, { name, goal });
-      syncRoutines();
+      await getRoutines();
+      nav("/RoutinePage");
+      
     } catch (e) {
       setError(e.message);
     }

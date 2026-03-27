@@ -51,7 +51,7 @@ export async function createRoutine(token, routine) {
     throw Error("You must be signed in to create an activity.");
   }
 
-  const response = await fetch(API + "/activities", {
+  const response = await fetch(API + "/routines", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export async function createRoutine(token, routine) {
     },
     body: JSON.stringify(routine),
   });
-
+  console.log(response);
   if (!response.ok) {
     const result = await response.json();
     throw Error(result.message);
@@ -109,7 +109,7 @@ export async function getAnActivity(id) {
   }
 }
 
-export async function getOneRoutine(id) {
+/* export async function getOneRoutine(id) {
   try {
     const response = await fetch(API + "/routines" );
     const result = await response.json();
@@ -119,4 +119,4 @@ export async function getOneRoutine(id) {
     console.error(e);
     return [];
   }
-}
+} */

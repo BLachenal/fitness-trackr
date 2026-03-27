@@ -5,7 +5,6 @@ import Error404 from "./Error404.jsx";
 import { Route, Routes } from "react-router";
 import Layout from "./layout/Layout.jsx"
 import ActivityDetails from "./activities/ActivityDetails.jsx";
-import RoutineList from "./routines/RoutineList.jsx";
 import RoutineDetail from "./routines/RoutineDetails.jsx";
 import RoutinesPage from "./routines/RoutinesPage.jsx";
 

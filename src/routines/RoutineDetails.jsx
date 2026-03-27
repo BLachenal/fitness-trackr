@@ -1,34 +1,38 @@
 import { useParams, useNavigate} from "react-router";
-import {getOneRoutine, deleteRoutine} from "../api/activities";
-import { useEffect, useState } from "react";
+import { deleteRoutine, getRoutines} from "../api/activities";
 import { useAuth } from "../auth/AuthContext";
+import { ToastContainer, toast} from "react-toastify"
+import { useRoutine } from "./RoutineContext";
 
 
 export default function RoutineDetail(){
-    const [routine, setRoutine] = useState();
+    //const [routine, setRoutine] = useState();
+    const {routines} = useRoutine();
     const {token} = useAuth();
     const {id} = useParams();
     const nav = useNavigate();
-   
-    useEffect(()=>{
-        const fetchRoutine = async () =>{
-            setRoutine(await getOneRoutine(id));
-        }
+    
+    const routine = routines.find(routine => routine.id == id);
 
-        fetchRoutine();
-    }, []);
 
     const handleClick = async () =>{
-        console.log(token, routine.id);
-        await deleteRoutine(token, routine.id);
-        nav("/RoutinePage");
+        try{
+            await deleteRoutine(token, routine.id);
+            await getRoutines();
+            nav("/RoutinePage");
+        }catch(error){
+            toast.error(error.message);
+        }
+
     }    
     return( 
         <>
             {routine && <>
-            <h1>{routine.goal}</h1>
-            <h3>{routine.creatorName}</h3>
-            <button onClick={handleClick}>X</button>
+            <h1>{routine.name}</h1>
+            <h2>Goal: {routine.goal}</h2>
+            <h4>created by: {routine.creatorName}</h4>
+            {token ? (<button onClick={handleClick}>X</button>) : ""}
+            <ToastContainer/>
             </>}
         </>
     );
