@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { useRoutine } from "./RoutineContext";
 
-export default function RoutineList() {
+export default function RoutineList({syncRoutines}) {
  const {routines} = useRoutine();
 
 

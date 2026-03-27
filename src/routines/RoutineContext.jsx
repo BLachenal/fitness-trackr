@@ -25,7 +25,7 @@ export function RoutineProvider({ children }) {
         syncRoutines();
     }, []);
 
-  const value = { routines };
+  const value = { routines, syncRoutines };
   return <RoutineContext.Provider value={value}>{children}</RoutineContext.Provider>;
 }
 
