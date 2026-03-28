@@ -59,7 +59,6 @@ export async function createRoutine(token, routine) {
     },
     body: JSON.stringify(routine),
   });
-  console.log(response);
   if (!response.ok) {
     const result = await response.json();
     throw Error(result.message);
@@ -123,8 +122,21 @@ export async function addSets(token, set) {
     },
     body: JSON.stringify(set),
   });
-  console.log(response);
   if (!response.ok) {
+    const result = await response.json();
+    throw Error(result.message);
+  }
+}
+
+export async function deleteSet(token, id) {
+  if(!token){
+    throw Error("You must be logged in to delete activities");
+  }
+  const response = await fetch(API + "/sets/" + id, {
+    method: "DELETE",
+    headers: {Authorization: "Bearer " + token },
+  });
+  if(!response.ok){
     const result = await response.json();
     throw Error(result.message);
   }
