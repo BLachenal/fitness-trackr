@@ -1,29 +1,13 @@
-import { getActivities } from "../api/activities";
+
+import { useActivity } from "../activities/ActivityContext";
 import { useAuth } from "../auth/AuthContext";
 
-/**
- * function for adding sets to api{
- *      blah blah
- * }
- * 
- * function for deleting sets to api{
- *      blah blah
- * }
- * 
- * export default setsForm{
- * return (
- *      <form for sets and blah blah> 
- * )
- * }
- * 
- * 
- */
 export default function SetsForm({routine}){
     const {token} = useAuth();
-    
-
+    const {activities} = useActivity();
+    console.log(activities);
     const tryAddSet = async (formData) => {
-        const activityId = "activity.id" //formData.get(activity.id);
+        const activityId = formData.get("activityId");
         const routineId = routine.id;
         const count = formData.get("count")
     }
@@ -34,8 +18,10 @@ export default function SetsForm({routine}){
             <>
             <h2>Add a Set</h2>
             <form action={tryAddSet}>
-                <select>
-                    <option value="activity.id">Activity.name</option>
+                <select name="activityId">
+                    {activities.map((activity) => (
+                        <option key={activity.id} value={activity.id}>
+                        {activity.name}</option>))}
                 </select>
                 <label>
                 Count
@@ -47,34 +33,27 @@ export default function SetsForm({routine}){
         );
     }
     
-    const emptySets = () =>{
-                     
-            if(routine.sets.length === 0){
-               return <p>Add some sets to your routine!</p>;
-            }else{
-                return (
-                <>
-                    <ul>
-                        {routine.sets.map((set)=>(
-                        <li key={set.id}><b>{set.name}:</b> x {set.count}
-                            <p>{set.description}</p>
-                            {token ? (<button>Delete Set</button>) : ""}
-                        </li>
-                        ))}
-                    </ul>
-                    <div>
-                        {addSet()}
-                    </div>
-                
-                </>
-
-                );
-            }
+    const emptySets = () =>{      
+     if(routine.sets.length === 0){
+        return <p>Add some sets to your routine!</p>;
+    }else{
+        return (
+            <>
+            <ul>
+                {routine.sets.map((set)=>(
+                <li key={set.id}><b>{set.name}:</b> x {set.count}
+                    <p>{set.description}</p>
+                    {token ? (<button>Delete Set</button>) : ""}
+                </li>
+                ))}
+            </ul>
+            <div>
+                {addSet()}
+            </div>       
+         </>
+        );
+        }
     }
-
-
-
-
     return (
         <>
             <h3>Sets:</h3>
