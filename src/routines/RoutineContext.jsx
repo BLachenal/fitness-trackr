@@ -2,9 +2,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { getRoutines } from "../api/activities";
 
-// import.meta.env allows us to access environment variables,
-// which are defined in a file named .env
-const API = import.meta.env.VITE_API;
 
 const RoutineContext = createContext();
 

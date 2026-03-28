@@ -6,7 +6,6 @@ import { toast, ToastContainer } from "react-toastify";
 
 
 export default function ActivityDetails(){
-    //{loggedIn ? (<button onClick={()=>tryDelete(activity)}>Delete</button>) : ""}
     const [activity, setActivity] = useState();
     const {token} = useAuth();
     const {id} = useParams();
@@ -31,7 +30,8 @@ export default function ActivityDetails(){
             {activity && <>
             <h1>{activity.name}</h1>
             <h3>{activity.description}</h3>
-            <button onClick={handleClick}>X</button>
+            {token ? (
+            <button onClick={handleClick}>X</button>) : ""}
             <ToastContainer/>
             </>}
         </>

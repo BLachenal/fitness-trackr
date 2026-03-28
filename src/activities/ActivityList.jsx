@@ -1,11 +1,8 @@
-import { useAuth } from "../auth/AuthContext";
-// import { deleteActivity } from "../api/activities";
 import { Link } from "react-router";
+import { useActivity } from "./ActivityContext";
 
-export default function ActivityList({ activities }) {
-  const {loggedIn} = useAuth();
-  const {token} = useAuth();
-
+export default function ActivityList() {
+  const {activities} = useActivity();
 
   return (
     <ul>
